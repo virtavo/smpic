@@ -21,6 +21,9 @@
   .card .thumb{background:#000;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;overflow:hidden}
   .card img{width:100%;height:100%;object-fit:contain}
   .card .info{padding:12px 14px;display:flex;justify-content:space-between;color:var(--dim);font-size:12px}
+  .card .badge{position:absolute;top:10px;left:10px;font-size:11px;padding:3px 9px;border-radius:7px;
+               background:rgba(0,0,0,.55);color:#cfe0ff;border:1px solid var(--line);backdrop-filter:blur(4px)}
+  .card .badge.ai{background:rgba(90,162,255,.22);color:#bcd6ff;border-color:rgba(90,162,255,.5)}
   .card .dl{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.6);color:#fff;border:1px solid var(--line);
             width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;
             text-decoration:none;font-size:15px;opacity:0;transition:.15s}
@@ -38,15 +41,16 @@
   <footer>Rendered with Blender · Cycles</footer>
   <div id="lb"><a id="lbDl" class="lbdl" download onclick="event.stopPropagation()">⬇ 下载图片</a><img id="lbImg"></div>
 <script>
-  const DATA = [{"img": "img/render_20260618_104901.jpg", "time": "2026-06-18 10:49:01", "resolution": "1000x1250", "samples": 80, "elapsed": 12.1, "lens": 105.0}, {"img": "img/render_20260618_101116.jpg", "time": "2026-06-18 10:11:16", "resolution": "1280x1600", "samples": 256, "elapsed": 30.0, "lens": 105.0}, {"img": "img/render_20260618_100926.jpg", "time": "2026-06-18 10:09:26", "resolution": "1280x1600", "samples": 256, "elapsed": 30.0, "lens": 105.0}, {"img": "img/render_20260618_100804.jpg", "time": "2026-06-18 10:08:04", "resolution": "1280x1600", "samples": 256, "elapsed": 28.3, "lens": 105.0}, {"img": "img/render_20260618_100641.jpg", "time": "2026-06-18 10:06:41", "resolution": "1280x1600", "samples": 256, "elapsed": 27.1, "lens": 105.0}, {"img": "img/render_20260618_100422.jpg", "time": "2026-06-18 10:04:22", "resolution": "800x1000", "samples": 200, "elapsed": 12.7, "lens": 105.0}, {"img": "img/render_20260618_100350.jpg", "time": "2026-06-18 10:03:50", "resolution": "800x1000", "samples": 200, "elapsed": 10.8, "lens": 105.0}, {"img": "img/render_20260618_100321.jpg", "time": "2026-06-18 10:03:21", "resolution": "960x1200", "samples": 64, "elapsed": 9.7, "lens": 105.0}, {"img": "img/render_20260618_095746.jpg", "time": "2026-06-18 09:57:46", "resolution": "3072x3840", "samples": 768, "elapsed": 207.0, "lens": 105.0}, {"img": "img/render_20260618_095026.jpg", "time": "2026-06-18 09:50:26", "resolution": "1280x1600", "samples": 96, "elapsed": 19.0, "lens": 105.0}];
+  const DATA = [{"img": "img/ai_20260622_093447_0.jpg", "time": "2026-06-22 09:34:47", "resolution": "768x960", "samples": "", "elapsed": 154.0, "lens": "", "kind": "ai", "tag": "AI 场景"}, {"img": "img/render_20260618_104901.jpg", "time": "2026-06-18 10:49:01", "resolution": "1000x1250", "samples": 80, "elapsed": 12.1, "lens": 105.0, "kind": "render", "tag": "棚拍"}, {"img": "img/render_20260618_101116.jpg", "time": "2026-06-18 10:11:16", "resolution": "1280x1600", "samples": 256, "elapsed": 30.0, "lens": 105.0, "kind": "render", "tag": "棚拍"}, {"img": "img/render_20260618_100926.jpg", "time": "2026-06-18 10:09:26", "resolution": "1280x1600", "samples": 256, "elapsed": 30.0, "lens": 105.0, "kind": "render", "tag": "棚拍"}, {"img": "img/render_20260618_100804.jpg", "time": "2026-06-18 10:08:04", "resolution": "1280x1600", "samples": 256, "elapsed": 28.3, "lens": 105.0, "kind": "render", "tag": "棚拍"}, {"img": "img/render_20260618_100641.jpg", "time": "2026-06-18 10:06:41", "resolution": "1280x1600", "samples": 256, "elapsed": 27.1, "lens": 105.0, "kind": "render", "tag": "棚拍"}, {"img": "img/render_20260618_100422.jpg", "time": "2026-06-18 10:04:22", "resolution": "800x1000", "samples": 200, "elapsed": 12.7, "lens": 105.0, "kind": "render", "tag": "棚拍"}, {"img": "img/render_20260618_100350.jpg", "time": "2026-06-18 10:03:50", "resolution": "800x1000", "samples": 200, "elapsed": 10.8, "lens": 105.0, "kind": "render", "tag": "棚拍"}, {"img": "img/render_20260618_100321.jpg", "time": "2026-06-18 10:03:21", "resolution": "960x1200", "samples": 64, "elapsed": 9.7, "lens": 105.0, "kind": "render", "tag": "棚拍"}, {"img": "img/render_20260618_095746.jpg", "time": "2026-06-18 09:57:46", "resolution": "3072x3840", "samples": 768, "elapsed": 207.0, "lens": 105.0, "kind": "render", "tag": "棚拍"}, {"img": "img/render_20260618_095026.jpg", "time": "2026-06-18 09:50:26", "resolution": "1280x1600", "samples": 96, "elapsed": 19.0, "lens": 105.0, "kind": "render", "tag": "棚拍"}];
   const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbDl=document.getElementById('lbDl');
   lb.onclick=()=>lb.style.display='none';
   function open1(img){lbImg.src=img;lbDl.href=img;lbDl.download=img.split('/').pop();lb.style.display='flex'}
   document.getElementById('grid').innerHTML = DATA.map(d=>`
     <div class="card" onclick="open1('${d.img}')">
+      <span class="badge ${d.kind==='ai'?'ai':''}">${d.tag||''}</span>
       <a class="dl" href="${d.img}" download="${d.img.split('/').pop()}" onclick="event.stopPropagation()" title="下载图片">⬇</a>
-      <div class="thumb"><img loading="lazy" src="${d.img}" alt="ShowMo render ${d.time}"></div>
-      <div class="info"><span>${d.resolution}</span><span>${d.time.slice(5)}</span></div>
+      <div class="thumb"><img loading="lazy" src="${d.img}" alt="ShowMo ${d.tag||'render'} ${d.time}"></div>
+      <div class="info"><span>${d.resolution||d.tag}</span><span>${d.time.slice(5)}</span></div>
     </div>`).join("");
 </script>
 </body>
